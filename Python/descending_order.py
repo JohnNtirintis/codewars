@@ -13,25 +13,33 @@ Input: 123456789 Output: 987654321
 """
 
 num = 42145
-new_num = ""
-counter = 0
-max = 0
-index = 0
+nums_list = []
+nums_copy = []
+new_nums = ""
+temp_index = 0
+max = ""
 
-s = str(num)
+for digit in str(num):
+    nums_list.append(str(digit))
+    nums_copy.append(str(digit))
 
-for index_i,i in enumerate(s):
-    for index_j,j in enumerate(s):
-        if str(j) > str(max) and index_j != index:
+# Had to create a nums copy,
+# Because since we .pop from the original list
+# Its length shortens and the loop finishes earlier than it should
+for index_i,i in enumerate(nums_copy):
+    for index_j,j in enumerate(nums_list):
+        if j > max:
             max = j
-            index = index_j
-    new_num += str(max)
-    max = 0
+            temp_index = index_j
+    new_nums += max
+    nums_list.pop(temp_index)
+    temp_index = 0
+    max = ""
 
-print(new_num)
+"""
+Alternative way: 
+return int("".join(sorted(str(num), reverse=True)))
+"""    
 
-# for index, item in enumerate(str(num)):
-#     print(index, item)
-
-
+print(int(new_nums))
 
